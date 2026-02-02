@@ -1,0 +1,113 @@
+args_command_line:
+  exp_name: s1_waypoint_passing
+  max_iterations: 800
+  num_envs: 2048
+  vis: false
+command_cfg:
+  num_commands: 3
+  pos_x_range:
+  - -1.5
+  - 1.5
+  pos_y_range:
+  - -1.5
+  - 1.5
+  pos_z_range:
+  - 0.5
+  - 1.5
+env_cfg:
+  TWR_max: 3.5
+  at_target_threshold: 0.5
+  base_init_pos:
+  - 0.0
+  - 0.0
+  - 1.0
+  base_init_quat:
+  - 1.0
+  - 0.0
+  - 0.0
+  - 0.0
+  cable_length: 0.48
+  clip_actions: 1.0
+  episode_length_s: 15.0
+  max_pitch_rate: 15.0
+  max_roll_rate: 15.0
+  max_safe_cable_angle_deg: 75
+  max_safety_violations: 150
+  max_throttle: 1.0
+  max_visualize_FPS: 60
+  max_yaw_rate: 5.0
+  num_actions: 4
+  num_of_dofs: 63
+  resampling_time_s: 3.0
+  simulate_action_latency: true
+  termination_cable_angle_threshold: 1.571
+  termination_if_close_to_ground: 0.1
+  termination_if_pitch_greater_than: 180
+  termination_if_roll_greater_than: 180
+  termination_if_x_greater_than: 3.0
+  termination_if_y_greater_than: 3.0
+  termination_if_z_greater_than: 2.0
+  visualize_camera: false
+  visualize_target: false
+obs_cfg:
+  num_obs: 26
+  obs_scales:
+    ang_vel_yaw: 0.3183098861837907
+    cable_angle: 0.66666667
+    cable_angle_vel: 0.1
+    lin_vel_xy: 0.1
+    lin_vel_z: 0.3
+    rel_pos_xy: 0.3333333333333333
+    rel_pos_z: 1.0
+reward_cfg:
+  reward_scales:
+    angular: -0.0002
+    cable_angle_safety: 0.03
+    crash: -10.0
+    smooth: -0.0001
+    target: 10.0
+    yaw: 0.01
+  unsafe_angle_penalty: 1.0
+  yaw_lambda: -10.0
+train_cfg:
+  algorithm:
+    clip_param: 0.2
+    desired_kl: 0.01
+    entropy_coef: 0.002
+    gamma: 0.99
+    lam: 0.95
+    learning_rate: 0.0003
+    max_grad_norm: 1.0
+    num_learning_epochs: 5
+    num_mini_batches: 4
+    schedule: adaptive
+    use_clipped_value_loss: true
+    value_loss_coef: 1.0
+  experiment_name: s1_waypoint_passing
+  init_member_classes: {}
+  policy:
+    activation: tanh
+    actor_hidden_dims:
+    - 128
+    - 128
+    critic_hidden_dims:
+    - 128
+    - 128
+    init_noise_std: 1.0
+  runner:
+    algorithm_class_name: PPO
+    checkpoint: -1
+    experiment_name: with_cable_hovering
+    load_run: -1
+    log_interval: 1
+    max_iterations: 500
+    num_steps_per_env: 100
+    policy_class_name: ActorCritic
+    record_interval: -1
+    resume: false
+    resume_path: null
+    run_name: null
+    runner_class_name: runner_class_name
+    save_interval: 100
+  runner_class_name: OnPolicyRunner
+  seed: 1
